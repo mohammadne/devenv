@@ -5,8 +5,14 @@ info() {
 }
 
 run() {
+    local destination="/usr/local/bin"
+
+    if [ -f "$destination/kubectl" ]; then
+        print_warning $1 "kubectl is already exists"
+        return
+    fi
+
     local latest_version=$(curl -L -s https://dl.k8s.io/release/stable.txt)
-    local url="https://dl.k8s.io/release/$latest_version/bin/linux/amd64/kubectl"
-    curl -LO --output-dir /tmp $url
-    sudo mv /tmp/kubectl /usr/local/bin && chmod +x /usr/local/bin/kubectl
+    curl -LO --output-dir /tmp "https://dl.k8s.io/release/$latest_version/bin/linux/amd64/kubectl"
+    sudo mv /tmp/kubectl "$destination" && chmod +x "$destination/kubectl"
 }

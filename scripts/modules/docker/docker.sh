@@ -1,6 +1,6 @@
 #!/bin/bash
 
-usage() {
+info() {
 	echo -n "install docker client binary"
 }
 
