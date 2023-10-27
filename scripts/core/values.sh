@@ -7,4 +7,4 @@ export dotfiles_repository="mohammadne/dotfiles"
 export dotfiles_directory="$HOME/Develop/dotfiles"
 
 # whether or not to backup existing configuration files
-export backup=true
+export backup=false
