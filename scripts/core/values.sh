@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # remote address for dotfiles repository
-export dotfiles_directory="mohammadne/dotfiles"
+export dotfiles_repository="mohammadne/dotfiles"
 
 # location to the dotfiles directory
 export dotfiles_directory="$HOME/Develop/dotfiles"
