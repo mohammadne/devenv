@@ -8,27 +8,21 @@ run() {
     sudo apt install -qy openssh-client
 
     linker $1 "$dotfiles_directory/ssh" "$HOME/.ssh"
-    _generate_ssh_keys
+    _generate_ssh_keys $1
 }
 
 function _generate_ssh_keys() {
 	# Use awk to extract and print unique IdentityFiles
-	identity_files=($(awk '$1 == "IdentityFile" {print $2}' "$ssh_config_file" | sort -u))
-
-	# Check if there are any IdentityFiles found
-	if [ ${#identity_files[@]} -eq 0 ]; then
-		echo "No IdentityFiles found in the SSH config file."
-	fi
+	local identity_files=($(awk '$1 == "IdentityFile" {print $2}' "$HOME/.ssh/config" | sort -u))
 
 	for i in "${!identity_files[@]}"; do
-		identity_file="${identity_files[$i]}"
-		path="$HOME/.ssh/$identity_file"
-		algorithm="${identity_file##*_}"
+		local identity_file=$(eval "echo ${identity_files[$i]}")
+		local algorithm="${identity_file##*_}"
 
-		if [ ! -f "$path" ]; then
-			ssh-keygen -t $algorithm -f $path -N "" -C ""
+		if [ ! -f "$identity_file" ]; then
+			ssh-keygen -t $algorithm -f "$identity_file" -N "" -C "" > /dev/null
 		fi
 	done
 
-	message "ssh" "add your public ssh credentials to remote hosts"
+	print_warning $1 "add your public ssh credentials to remote hosts"
 }
