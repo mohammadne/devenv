@@ -1,7 +1,7 @@
 #!/bin/bash
 
 info() {
-	echo -n "install zsh and relevant plugins"
+	echo -n "install ZSH and relevant plugins (ohmyzsh)"
 }
 
 run() {

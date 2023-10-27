@@ -8,5 +8,5 @@ function clone_if_not_exists() {
         return
     fi
 
-    git clone "$1" "$2" "${@:3}"
+    git clone "$1" "$2" "${@:3}" -q
 }
