@@ -5,6 +5,8 @@ info() {
 }
 
 run() {
+    sudo apt install -qy fontconfig
+
     _fira_code
 }
 
@@ -16,7 +18,7 @@ function _fira_code() {
     font_repository="https://github.com/ryanoasis/nerd-fonts"
     font_repository_release="v2.1.0"
 
-    font_home="~/.local/share/fonts/$font_family"
+    font_home="$HOME/.local/share/fonts/$font_family"
 
     if [ -d $font_home ]; then
         print_warning $1 "font directory for $font_family already exist."
