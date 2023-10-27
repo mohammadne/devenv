@@ -23,7 +23,7 @@ function linker() {
 			return
 		fi
 
-		if [ $backup ]; then
+		if [ $backup = true ]; then
 			print_warning $module "backup from pre-exsisting dst_path file (directory)"
 			random_tail=$(tr -dc 'a-z0-9' </dev/urandom | head -c 5)
 			cp -Rf $dst_path "$dst_path.backup-$random_tail" 2> /dev/null
