@@ -9,8 +9,8 @@ for core_file in "$scripts_directory/core"/*; do source "$core_file"; done
 # source library files into the script
 for library_file in "$scripts_directory/library"/*; do source "$library_file"; done
 
-# print_message "dotfiles" "ensure dotfiles repository is present and has the latest changes"
-# ensure_dotfiles "dotfiles"
+print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
+ensure_dotfiles "dotfiles"
 
 for module in "${@}"; do
     echo # a newline to seperate modules from each others
