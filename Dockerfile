@@ -11,7 +11,7 @@ COPY . $WORKDIR/devenv
 
 RUN /opt/workspace/devenv/scripts/install.sh \
     --set "DOTFILES_DIRECTORY=$WORKDIR/dotfiles" \
-    "docker/install-binary" "zsh" "vim" "tmux" "kubernetes/kubectl"
+    "zsh" "vim" "tmux" "kubernetes/kubectl" "docker/install-binary"
 
 WORKDIR $WORKDIR
 

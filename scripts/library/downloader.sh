@@ -8,7 +8,7 @@ function clone_if_not_exists() {
         return
     fi
 
-    git clone "$1" "$2" "${@:3}" # -q
+    git clone "$1" "$2" "${@:3}" -q
 }
 
 # parameter 1: url - string
@@ -19,5 +19,5 @@ function curl_if_not_exists() {
         return
     fi
 
-    curl "$1" -o "$2" "${@:3}" --ipv4 -v # --silent
+    curl "$1" -o "$2" "${@:3}" --ipv4 --silent
 }

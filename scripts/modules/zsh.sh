@@ -26,7 +26,7 @@ run() {
     clone_if_not_exists https://github.com/zsh-users/zsh-completions "$ohmyzsh_custom/plugins/zsh-completions"
 
     # change default shell to zsh
-    sudo usermod --shell "$(which zsh)" "$USER"
+    sudo usermod --shell "$(which zsh)" "$(whoami)"
 }
 
 function add_zdotdir() {
