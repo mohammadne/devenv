@@ -7,13 +7,50 @@ scripts_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")"/. && pwd)"
 for core_file in "$scripts_directory/core"/*; do source "$core_file"; done
 for library_file in "$scripts_directory/library"/*; do source "$library_file"; done
 
-source_values_file "$scripts_directory/values.env"
+source_values "$scripts_directory/values.env"
 
-print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
-ensure_dotfiles "dotfiles"
+# print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
+# ensure_dotfiles "dotfiles"
 
-# TODO: add (--set, --install, --help, --info) as arguments
-for module in "${@}"; do
+function help() {
+    echo "HELP"
+    exit 0
+}
+
+function info() {
+    echo "INFO"
+    exit 0
+}
+
+function set() {
+    # at least one argument should be passed
+    if [ $# -ne 1 ]; then
+        print_error "main" "invalid set arguments"
+        help;
+    fi
+
+    source_values $1
+}
+
+function install() {
+    echo "INSTALL"
+    exit 0
+}
+
+# at least one argument should be passed
+if [ $# -eq 0 ]; then help; fi
+
+# Parse arguments 
+while [ $# -gt 0 ]; do
+    case $1 in
+        --help) help ;;
+        --info) info ;;
+        --set) set $2; shift 2 ;;
+        *) install_list+=("$1"); shift ;;
+    esac
+done
+
+for module in "${install_list[@]}"; do
     echo # a newline to seperate modules from each others
 
     source "$scripts_directory/modules/$module.sh" 2>/dev/null || {
