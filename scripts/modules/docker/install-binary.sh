@@ -6,7 +6,7 @@ info() {
 
 run() {
     local version="docker-17.06.2-ce"
-    local architecture="x86_64"
+    local architecture=$(system_architecture)
     local destination="/tmp/$version.tgz"
 
     curl_if_not_exists "https://download.docker.com/linux/static/stable/$architecture/$version.tgz" "$destination" -sSL -O
