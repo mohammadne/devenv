@@ -12,6 +12,7 @@ source_values_file "$scripts_directory/values.env"
 print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
 ensure_dotfiles "dotfiles"
 
+# TODO: add (--set, --install, --help, --info) as arguments
 for module in "${@}"; do
     echo # a newline to seperate modules from each others
 
