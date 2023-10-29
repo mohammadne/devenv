@@ -9,9 +9,6 @@ for library_file in "$scripts_directory/library"/*; do source "$library_file"; d
 
 source_values "$scripts_directory/values.env"
 
-print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
-ensure_dotfiles "dotfiles"
-
 function help_command() {
     echo "HELP"
     exit 0
@@ -38,6 +35,9 @@ while [ $# -gt 0 ]; do
         *) modules_list+=("$1"); shift ;;
     esac
 done
+
+print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
+ensure_dotfiles "dotfiles"
 
 for module in "${modules_list[@]}"; do
     echo # a newline to seperate modules from each others
