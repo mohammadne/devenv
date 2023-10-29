@@ -1,7 +1,7 @@
 #!/bin/bash
 
 info() {
-	echo -n "install docker client binary"
+	echo -n "install docker client and daemon"
 }
 
 run() {
