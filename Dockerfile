@@ -15,4 +15,4 @@ RUN /opt/workspace/devenv/scripts/install.sh \
 
 WORKDIR $WORKDIR
 
-SHELL ["/bin/bash", "-c"]
+CMD [ "zsh" ]
