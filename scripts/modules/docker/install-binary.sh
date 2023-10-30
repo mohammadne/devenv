@@ -4,6 +4,7 @@ info() {
 	echo -n "install docker client binary"
 }
 
+# TODO: implement with download_versioned_file
 run() {
     local version="docker-24.0.4"
     local architecture=$(system_architecture)

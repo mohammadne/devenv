@@ -1,35 +1,58 @@
 #!/bin/bash
 
 info() {
-	echo -n "install docker client binary"
+	echo -n "install and config Go language"
 }
 
 run() {
-    require_pacman go operator-sdk
-    msg "$(go version)"
+	local go_root="/usr/local/go"
 
-    msg "create go directories structure"
-	local gopath
-	gopath=$HOME/.cache/go
-	[ -d "$gopath/pkg" ] || mkdir -p "$gopath/pkg"
+    _install_go $1 $go_root
+    _config_go $1 $go_root
+	_install_go_dependencies $1 $go_root
+}
 
-    local gobin
-	gobin=$HOME/.local/bin
-	[ -d "$gobin" ] || mkdir -p "$gobin"
+# TODO: implement with download_versioned_file
+_install_go() {
+    local version="1.21.3"
+	local full_version="go$version.linux-amd64"
 
-    msg "set go environments"
-    go env -w GOPATH="$HOME/.cache/go"
-	go env -w GOBIN="$HOME/.local/bin"
-	go env -w GOPROXY="https://goproxy.io,goproxy.cn,direct"
-	go env -w GONOSUMDB="gitlab.snapp.ir"
-	go env -w GOPRIVATE="gitlab.snapp.ir"
-	go env
+	if [ -d "$2" ]; then
+		if echo $("$2/bin/go" version) | grep -q "$version"; then
+			print_success $1 "Go $version is already installed"
+			return
+		else
+			print_warning $1 "uninstalling old version of Go"
+			sudo rm -rf /usr/local/go
+		fi
+	fi
 
-    msg "fetch some good and useful go packages"
-	require_go github.com/golangci/golangci-lint/cmd/golangci-lint
-	require_go mvdan.cc/gofumpt
-	require_go golang.org/x/tools/cmd/goimports
-	require_go golang.org/x/tools/gopls
-	require_go golang.org/dl/gotip
-	require_go github.com/go-delve/delve/cmd/dlv
+    local destination="/tmp/$full_version.tar.gz"
+    curl_if_not_exists "https://go.dev/dl/$full_version.tar.gz" "$destination" -SL
+	sudo tar -C /usr/local -xzf "$destination"
+	rm -rf $destination
+}
+
+_config_go() {
+	local go_binary="$2/bin/go"
+
+	print_message $1 "set go environments"
+    $go_binary env -w GOPATH="$HOME/.cache/go"
+	$go_binary env -w GOBIN="$HOME/.local/bin"
+	$go_binary env -w GOPROXY="https://goproxy.io,goproxy.cn,direct"
+	$go_binary env -w GONOSUMDB="git.cafebazaar.ir"
+	$go_binary env -w GOPRIVATE="git.cafebazaar.ir"
+}
+
+_install_go_dependencies() {
+	local go_binary="$2/bin/go"
+
+	print_message $1 "install useful dependencies"
+	$go_binary install github.com/onsi/ginkgo/v2/ginkgo@v2.11.0
+	# require_go github.com/golangci/golangci-lint/cmd/golangci-lint
+	# require_go mvdan.cc/gofumpt
+	# require_go golang.org/x/tools/cmd/goimports
+	# require_go golang.org/x/tools/gopls
+	# require_go golang.org/dl/gotip
+	# require_go github.com/go-delve/delve/cmd/dlv
 }

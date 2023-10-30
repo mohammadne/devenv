@@ -5,16 +5,11 @@ info() {
 }
 
 run() {
-    local destination="/usr/local/bin"
+    local binary_path="/usr/local/bin/kubectl"
+    local version=$(curl -L -s https://dl.k8s.io/release/stable.txt)
+    local url="https://dl.k8s.io/release/$version/bin/linux/amd64/kubectl"
 
-    if [ -f "$destination/kubectl" ]; then
-        print_warning $1 "kubectl is already exists"
-        return
-    fi
-
-    local latest_version=$(curl -L -s https://dl.k8s.io/release/stable.txt)
-    curl_if_not_exists "https://dl.k8s.io/release/$latest_version/bin/linux/amd64/kubectl" "/tmp/kubectl" -L
-    sudo mv /tmp/kubectl "$destination" && chmod +x "$destination/kubectl"
+    download_versioned_file $1 $binary_path $version "version --client" $url false
 
     # TODO: install plugins (kubectl-neat, kubectl-ns)
 }
