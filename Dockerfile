@@ -10,7 +10,7 @@ COPY . $WORKDIR/devenv
 RUN /opt/workspace/devenv/scripts/install.sh \
     --set "DOTFILES_DIRECTORY=$WORKDIR/dotfiles" \
     "zsh" "vim" "tmux" \
-    "docker/install-binary" \
+    "docker/client-binary" \
     "kubernetes/helm" "kubernetes/helmsman" "kubernetes/kind" "kubernetes/kubectl" "kubernetes/sops" "kubernetes/telepresence" \
     "languages/go"
 
