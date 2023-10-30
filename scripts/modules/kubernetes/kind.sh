@@ -9,5 +9,7 @@ run() {
     local version="v0.20.0"
     local url="https://kind.sigs.k8s.io/dl/$version/kind-linux-amd64"
 
-    download_versioned_file $1 $binary_path $version "version" $url false
+    if check_versioned_binary $1 $binary_path $version "version"; then return; fi
+    if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
+    chmod +x "$result" && sudo mv $result $binary_path
 }

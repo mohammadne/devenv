@@ -5,13 +5,14 @@ RUN apt update && apt install -y \
 
 ENV WORKDIR="/opt/workspace"
 
-# Set the working directory inside the container
-# Clone the current Git repository into the container
 COPY . $WORKDIR/devenv
 
 RUN /opt/workspace/devenv/scripts/install.sh \
     --set "DOTFILES_DIRECTORY=$WORKDIR/dotfiles" \
-    "zsh" "vim" "tmux" "kubernetes/kubectl" "docker/install-binary"
+    "zsh" "vim" "tmux" \
+    "docker/install-binary" \
+    "kubernetes/helm" "kubernetes/helmsman" "kubernetes/kind" "kubernetes/kubectl" "kubernetes/sops" "kubernetes/telepresence" \
+    "languages/go"
 
 WORKDIR $WORKDIR
 

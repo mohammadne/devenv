@@ -47,12 +47,4 @@ function download_file() {
     fi
     
     echo $download_path
-
-    # if [ -z $tar_file ]; then
-    #     chmod +x "$download_path" && sudo mv $download_path $binary_path
-    # else
-    #     sudo tar -C $(dirname $binary_path) -xzf $download_path -T $tar_file
-    # fi
-
-    # rm -rf $download_path
 }
