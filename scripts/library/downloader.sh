@@ -26,34 +26,33 @@ function curl_if_not_exists() {
 # parameter 2: binary path - string
 # parameter 3: version - string
 # parameter 4: version check command - string
-# parameter 5: url - string
-# parameter 6: is tar file - bool
-function download_versioned_file() {
-    local module="${1##*/}"
-    local binary_path="$2"
-    local version="$3"
-    local version_check_command="$4"
-    local url="$5"
-    local is_tar_file="$6"
-
-	if [ -f "$binary_path" ]; then
-		if echo $($binary_path $version_check_command) | grep -q $version; then
-			print_success $module "module with version $version is already installed"
-			return
-		else
-			print_warning $module "uninstalling old version of module"
-			sudo rm -rf $binary_path
-		fi
+function check_versioned_binary() {
+	if [ -f "$2" ] && echo $($2 $4) | grep -q $3; then
+        print_success $1 "module with version $3 is already installed"
+        return 0 # true
 	fi
 
-    local download_path="/tmp/${module,,}_${version}"
-    curl "$url" -o "$download_path" -SL
+    return 1 # false
+}
 
-    if [ "$is_tar_file" = true ] || [ "$is_tar_file" = 1 ]; then
-        sudo tar -C $(dirname $binary_path) -xzf $download_path
-    else
-        chmod +x "$download_path" && sudo mv $download_path $binary_path
+# parameter 1: module - string
+# parameter 2: url - string
+function download_file() {
+    local random_tail=$(tr -dc 'a-z0-9' </dev/urandom | head -c 10)
+    local download_path="/tmp/${random_tail}"
+
+    if ! curl "$url" -o "$download_path" -SL; then
+        print_error $1 "download has been failed ($url)"
+        return 1
     fi
+    
+    echo $download_path
 
-    rm -rf $download_path
+    # if [ -z $tar_file ]; then
+    #     chmod +x "$download_path" && sudo mv $download_path $binary_path
+    # else
+    #     sudo tar -C $(dirname $binary_path) -xzf $download_path -T $tar_file
+    # fi
+
+    # rm -rf $download_path
 }
