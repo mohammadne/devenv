@@ -9,6 +9,7 @@ run() {
     local version="3.16.1"
     local url="https://github.com/Praqma/helmsman/releases/download/v${version}/helmsman_${version}_linux_amd64.tar.gz"
 
-    download_versioned_file $1 $binary_path $version "-v" $url true
-    sudo rm -rf /usr/local/bin/LICENSE /usr/local/bin/README.md
+    if check_versioned_binary $1 $binary_path $version "-v"; then return; fi
+    if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
+    sudo tar -C $(dirname $binary_path) -xzf $result "helmsman"
 }
