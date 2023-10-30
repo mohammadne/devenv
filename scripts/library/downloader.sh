@@ -12,10 +12,10 @@ function clone_if_not_exists() {
 }
 
 # parameter 1: url - string
-# parameter 2: destination directory - string
+# parameter 2: destination directory/file - string
 # parameter 3: clone options
 function curl_if_not_exists() {
-    if [ -d "$2" ] ; then
+    if [ -d "$2" ] || [ -f "$2" ] ; then
         return
     fi
 

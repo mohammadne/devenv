@@ -12,4 +12,8 @@ run() {
     if check_versioned_binary $1 $binary_path $version "version"; then return; fi
     if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
     sudo tar -C $(dirname $binary_path) -xzf $result --strip-components=1 "linux-amd64/helm"
+
+    # install required helm plugins
+    $binary_path plugin install https://github.com/databus23/helm-diff --version v3.6.0
+    $binary_path plugin install https://github.com/jkroepke/helm-secrets --version v4.2.0
 }
