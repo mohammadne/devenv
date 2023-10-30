@@ -9,3 +9,19 @@ Provisioner for setup a tailored environment for development
 ![Ubuntu Compatibility](https://img.shields.io/badge/works%20on-ubuntu-white?logo=ubuntu&style=for-the-badge)
 
 > **_NOTE:_** I'm using Ubuntu as my personal OS (normally latest version for my desktop and latest LTS version for my server) and this provisioner repository (devenv) is written and tested based on it.
+
+## run
+
+```bash
+eval "$(ssh-agent)"
+ssh-add ~/.ssh/github_ed25519
+
+docker compose run devenv
+```
+
+## TODO
+
+- needs to run `eval "$(ssh-agent)"` and `ssh-add path-to-key` everythime before running compose
+- change ssh socket in container
+- mount working directory into container
+- add kind setup and configuration
