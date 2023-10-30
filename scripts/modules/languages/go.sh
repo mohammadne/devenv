@@ -12,32 +12,13 @@ run() {
 	_install_go_dependencies $1 $go_root
 }
 
-# TODO: implement with download_versioned_file
 _install_go() {
     local version="1.21.3"
     local url="https://go.dev/dl/go${version}.linux-amd64.tar.gz"
 
     if check_versioned_binary $1 "$2/bin/go" $version "version"; then return; fi
     if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
-    sudo rm -rf $2 && sudo tar -C $(dirname $2) -xzf $result
-
-    # local version="1.21.3"
-	# local full_version="go$version.linux-amd64"
-
-	# if [ -d "$2" ]; then
-	# 	if echo $("$2/bin/go" version) | grep -q "$version"; then
-	# 		print_success $1 "Go $version is already installed"
-	# 		return
-	# 	else
-	# 		print_warning $1 "uninstalling old version of Go"
-	# 		sudo rm -rf /usr/local/go
-	# 	fi
-	# fi
-
-    # local destination="/tmp/$full_version.tar.gz"
-    # curl_if_not_exists "https://go.dev/dl/$full_version.tar.gz" "$destination" -SL
-	# sudo tar -C /usr/local -xzf "$destination"
-	# rm -rf $destination
+    sudo rm -rf $2 && sudo tar -C $(dirname $2) -xzf $result && rm -rf "$result"
 }
 
 _config_go() {

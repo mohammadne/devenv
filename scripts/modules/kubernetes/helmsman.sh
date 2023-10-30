@@ -11,5 +11,5 @@ run() {
 
     if check_versioned_binary $1 $binary_path $version "-v"; then return; fi
     if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
-    sudo tar -C $(dirname $binary_path) -xzf $result "helmsman"
+    sudo tar -C $(dirname $binary_path) -xzf $result "helmsman" && rm -rf "$result"
 }

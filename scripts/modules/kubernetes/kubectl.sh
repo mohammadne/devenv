@@ -32,7 +32,6 @@ _install_kubectl_neat_plugin() {
     local version="v2.0.3"
     local url="https://github.com/itaysk/kubectl-neat/releases/download/$version/kubectl-neat_linux_amd64.tar.gz"
 
-    # if check_versioned_binary $1 $binary_path $version "version --client"; then return; fi
     if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
     chmod +x "$result" && sudo rm -rf $binary_path && sudo mv $result $binary_path
 }
