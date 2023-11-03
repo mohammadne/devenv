@@ -1,13 +1,22 @@
 #!/bin/bash
 
 info() {
-	echo -n "install base packages"
+	echo -n "install base packages and tools"
 }
 
 run() {
+	if ! command -v sudo &> /dev/null; then
+		print_warning $1 "sudo has been missed, trying to install it"
+        if ! apt update && apt install -qy sudo; then
+            print_error $1 "installing sudo has been failed"
+            return 1
+        fi
+	fi
+
     local packages=(
-        sudo
         git
+        ca-certificates
+        openssh-client
 
         # ------------------------------------------------ editors
 
@@ -49,9 +58,11 @@ run() {
         # pastel # generate, analyze, convert and manipulate colors
         # man-pages man-db # manual page managment
     )
-    
-    message "base" "Installs base packages for having a working system"
 
-	message "installing ${packages[*]}"
-	require_dnf "${packages[@]}"
+    sudo apt install -qy "${packages[@]}"
+    
+    # message "base" "Installs base packages for having a working system"
+
+	# message "installing ${packages[*]}"
+	# require_dnf "${packages[@]}"
 }

@@ -24,9 +24,6 @@ function set_command() {
     source_values $1
 }
 
-# at least one argument should be passed
-if [ $# -eq 0 ]; then help_command; fi
-
 # Parse arguments 
 while [ $# -gt 0 ]; do
     case $1 in
@@ -36,15 +33,12 @@ while [ $# -gt 0 ]; do
     esac
 done
 
-print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
-ensure_dotfiles "dotfiles"
-
-for module in "${modules_list[@]}"; do
-    echo # a newline to seperate modules from each others
+function install_module() {
+    local module=$1
 
     source "$scripts_directory/modules/$module.sh" 2>/dev/null || {
         print_error $module "404 module not found -(("
-        continue
+        return
     }
 
     if declare -f run &> /dev/null; then
@@ -59,4 +53,20 @@ for module in "${modules_list[@]}"; do
     else
         print_warning $module "run function not found, there is nothing to do"
     fi
+}
+
+print_message "base" "ensure base packages and tools has been installed"
+install_module "base" && echo
+
+print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
+ensure_dotfiles "dotfiles" && echo
+
+# at least one argument should be passed
+if [ -z "${modules_list+xxx}" ] || [ "${modules_list[@]}" -eq 0 ]; then
+    print_warning "devenv" "no module to install, exiting..."
+    exit 0
+fi
+
+for module in "${modules_list[@]}"; do
+    echo && install_module $module
 done
