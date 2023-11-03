@@ -1,0 +1,16 @@
+---
+- name: Print the gateway for each host when defined
+  ansible.builtin.debug:
+    msg: HELLO
+
+# create_k8s_cluster
+# export HTTP_PROXY=$BANDAR_PROXY HTTPS_PROXY=$BANDAR_PROXY http_proxy=$BANDAR_PROXY https_proxy=$BANDAR_PROXY
+# export NO_PROXY="${NO_PROXY}"
+# export no_proxy="${no_proxy}"
+# $KIND create cluster --name $K8S_CLUSTER_NAME --image $KIND_KUBERNETES_IMAGE --config kindconfig.yaml
+# export K8S_NODES=$($KIND get nodes --name $K8S_CLUSTER_NAME)
+
+# generate_kubeconfig
+# $KIND export kubeconfig --name $K8S_CLUSTER_NAME --kubeconfig $KUBECONFIG
+
+# create_external_bridge

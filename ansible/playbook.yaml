@@ -1,5 +1,6 @@
 - hosts: machine
   become: yes
-  become_user: {{ ansible_user_id }}
+  become_user: {{ ansible_env.USER }}
+  gather_facts: true
   roles:
     - { role: hello }
