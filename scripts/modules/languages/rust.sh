@@ -17,7 +17,7 @@ _install_rust() {
 }
 
 _install_rust_dependencies() {
-    local cargo_binary="$2/bin/go"
+    local cargo_binary="$2/bin/cargo"
 
     print_message $1 "install useful plugins"
 	$cargo_binary install cargo-edit cargo-expand

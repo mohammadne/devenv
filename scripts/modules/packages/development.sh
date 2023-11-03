@@ -31,9 +31,12 @@ run() {
         telnet # interactive communication with another host
         tcpdump tshark # dump traffic on a network
 
-        # ------------------------------------------------ utilities
+        # ------------------------------------------------ miscellaneous
 
         man-db # manual page managment
+        libssl-dev
+        ansible
+        terraform
     )
 
     sudo apt install -qy "${packages[@]}"
