@@ -1,7 +1,7 @@
 #!/bin/bash
 
 info() {
-	echo -n "install base packages and tools"
+	echo -n "install base packages and tools for having a working system"
 }
 
 run() {
@@ -20,49 +20,35 @@ run() {
 
         # ------------------------------------------------ editors
 
-        # bat # cat alternative
-        # exa # modern replacement for ls
-        # clipman # clipboard
-        # jq yq jless
-        # yamllint # linter for YAML files 
+        bat # cat alternative
+        exa # modern replacement for ls
+        clipman # clipboard
+        # jq jless # json files utilities
+        # yq yamllint # YAML files utilities 
         # glow # render markdown
-        # fzf # fuzzy finder 
+        fzf # fuzzy finder 
 
         # ------------------------------------------------ system
 
-        # htop # process viewer
-        # dua-cli # Disk Usage Analyzer
+        htop # process viewer
         # cpupower # processor power managment
-        # reflector # retrieve the latest mirror list from the Arch
-        # usbutils # USB utilities
+        usbutils # USB utilities
 
         # ------------------------------------------------ networking
 
+        iproute2 # installs ip, ss (netstat replacement)
         curl # network data transfer utility
-        # mtr inetutils websocat fuse2
-        # aria2 # download manager
-        # bandwhich # bandwidth utilization tool
-        # speedtest-cli # speedtest cli
-        # openbsd-netcat
-        # telnet
-        # tcpdump
-        # ss
-        # tshark
-        # wireshark
+        mtr # network diagnostic tool
+        aria2 # download manager
+        speedtest-cli # speedtest cli
+        nmap-ncat # ncat from nmap (not Open-BSD)
+        telnet # interactive communication with another host
+        tcpdump tshark wireshark # dump traffic on a network
 
         # ------------------------------------------------ utilities
 
-        # fd # new find
-        # jwt-cli # work with JSON Web Tokens
-        # tokei # statistics about your code
-        # pastel # generate, analyze, convert and manipulate colors
-        # man-pages man-db # manual page managment
+        man-db # manual page managment
     )
 
     sudo apt install -qy "${packages[@]}"
-    
-    # message "base" "Installs base packages for having a working system"
-
-	# message "installing ${packages[*]}"
-	# require_dnf "${packages[@]}"
 }

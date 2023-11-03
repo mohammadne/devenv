@@ -17,5 +17,8 @@ run() {
 _install_rust_dependencies() {
     msg 'install cargo plugins'
 	cargo install cargo-edit cargo-expand
-    cargo install tokei
+    cargo install tokei # statistics about your codes
+    cargo install --features=ssl websocat # webSocket client
+    cargo install bandwhich # displaying network utilization
+    cargo install dua-cli  # disk Usage Analyzer
 }
