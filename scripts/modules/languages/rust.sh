@@ -5,20 +5,25 @@ info() {
 }
 
 run() {
-    require_pacman rust
+    export RUSTUP_HOME="$HOME/.rustup"
+    export CARGO_HOME="$HOME/.cargo"
 
-	# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	# add $HOME/.cargo/bin to path
+    _install_rust $1
+    _install_rust_dependencies $1 $CARGO_HOME
+}
 
-    mkdir -p "$HOME/.cargo" || true
-    cp "$dotfiles_root/rust/config.toml" "$HOME/.cargo/config.toml"
+_install_rust() {
+    curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
 }
 
 _install_rust_dependencies() {
-    msg 'install cargo plugins'
-	cargo install cargo-edit cargo-expand
-    cargo install tokei # statistics about your codes
-    cargo install --features=ssl websocat # webSocket client
-    cargo install bandwhich # displaying network utilization
-    cargo install dua-cli  # disk Usage Analyzer
+    local cargo_binary="$2/bin/go"
+
+    print_message $1 "install useful plugins"
+	$cargo_binary install cargo-edit cargo-expand
+    $cargo_binary install tokei # statistics about your codes
+    $cargo_binary install --features=ssl websocat # webSocket client
+    $cargo_binary install bandwhich # displaying network utilization
+    $cargo_binary install dua-cli  # disk Usage Analyzer
+    $cargo_binary install jless  # JSON viewer
 }

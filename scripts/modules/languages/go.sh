@@ -37,6 +37,8 @@ _install_go_dependencies() {
 
 	print_message $1 "install useful dependencies"
 	$go_binary install github.com/onsi/ginkgo/v2/ginkgo@v2.11.0
+	$go_binary install github.com/charmbracelet/glow@latest # render markdown
+	$go_binary install github.com/mikefarah/yq/v4@latest
 	# require_go github.com/golangci/golangci-lint/cmd/golangci-lint
 	# require_go mvdan.cc/gofumpt
 	# require_go golang.org/x/tools/cmd/goimports

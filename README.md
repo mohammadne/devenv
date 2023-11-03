@@ -25,3 +25,9 @@ docker compose run devenv
 - change ssh socket in container
 - mount working directory into container
 - add kind setup and configuration
+
+## Wishlist
+
+Here is a list of tools and packages that I want to explore and work with them:
+
+- <https://github.com/denisidoro/navi>

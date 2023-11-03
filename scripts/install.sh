@@ -56,16 +56,16 @@ function install_module() {
 }
 
 print_message "base" "ensure base packages and tools has been installed"
-install_module "base" && echo
+install_module "packages/base" && echo
 
 print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
 ensure_dotfiles "dotfiles" && echo
 
 # at least one argument should be passed
-if [ -z "${modules_list+xxx}" ] || [ "${modules_list[@]}" -eq 0 ]; then
-    print_warning "devenv" "no module to install, exiting..."
-    exit 0
-fi
+# if [ -z "${modules_list+xxx}" ] || [ "${modules_list[@]}" -eq 0 ]; then
+#     print_warning "devenv" "no module to install, exiting..."
+#     exit 0
+# fi
 
 for module in "${modules_list[@]}"; do
     echo && install_module $module
