@@ -1,7 +1,7 @@
 #!/bin/bash
 
 info() {
-	echo -n "install kubectl client binary"
+	echo -n "install rust language"
 }
 
 run() {
@@ -12,7 +12,10 @@ run() {
 
     mkdir -p "$HOME/.cargo" || true
     cp "$dotfiles_root/rust/config.toml" "$HOME/.cargo/config.toml"
+}
 
+_install_rust_dependencies() {
     msg 'install cargo plugins'
 	cargo install cargo-edit cargo-expand
+    cargo install tokei
 }
