@@ -1,0 +1,5 @@
+- hosts: machine
+  become: yes
+  become_user: {{ ansible_user_id }}
+  roles:
+    - { role: hello }
