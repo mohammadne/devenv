@@ -12,7 +12,7 @@ run() {
         build-essential
     )
 
-	if ! command -v sudo &> /dev/null; then
+	if command -v sudo &> /dev/null; then
         sudo apt update && sudo apt install -qy "${packages[@]}"
         return
 	fi
