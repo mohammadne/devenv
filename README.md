@@ -26,15 +26,10 @@ ssh-add ~/.ssh/github_ed25519
 docker compose run devenv
 ```
 
-## TODO
+## TODOs and Wishlists
 
-- needs to run `eval "$(ssh-agent)"` and `ssh-add path-to-key` everythime before running compose
-- change ssh socket in container
-- mount working directory into container
-- add kind setup and configuration
-
-## Wishlist
-
-Here is a list of tools and packages that I want to explore and work with them:
+Here is a list of works, tools or packages that I want to explore or fix them
 
 - <https://github.com/denisidoro/navi>
+- add terraform binary installation
+- needs to run `eval "$(ssh-agent)"` and `ssh-add path-to-key` everythime before running compose
