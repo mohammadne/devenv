@@ -27,7 +27,7 @@ run() {
         mtr # network diagnostic tool
         aria2 # download manager
         speedtest-cli # speedtest cli
-        nmap-ncat # ncat from nmap (not Open-BSD)
+        ncat # ncat from nmap (not Open-BSD)
         telnet # interactive communication with another host
         tcpdump tshark # dump traffic on a network
 
@@ -36,7 +36,6 @@ run() {
         man-db # manual page managment
         libssl-dev
         ansible
-        terraform
     )
 
     sudo apt install -qy "${packages[@]}"
