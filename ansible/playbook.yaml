@@ -1,6 +1,7 @@
 - hosts: machine
   become: yes
-  become_user: {{ ansible_env.USER }}
-  gather_facts: true
+  become_user: "{{ become_user }}"
+  gather_facts: false
   roles:
-    - { role: hello }
+    - { role: kind-cluster, tags: 'kind-cluster' }
+  tags: [ 'never' ]
