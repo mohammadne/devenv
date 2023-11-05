@@ -18,7 +18,7 @@ run() {
 
         htop # process viewer
         usbutils # USB utilities
-        btop # A monitor of resources 
+        htop # A monitor of resources 
 
         # ------------------------------------------------ networking
 
