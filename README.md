@@ -10,7 +10,7 @@ Provisioner for setup a tailored environment for development
 
 > **_NOTE:_** I'm using Ubuntu as my personal OS (normally latest version for my desktop and latest LTS version for my server) and this provisioner repository (devenv) is written and tested based on it.
 
-```
+```bash
 devenv_directory=$HOME/Develop/devenv
 mkdir -p "$(dirname $devenv_directory)"
 git clone https://github.com/mohammadne/devenv.git $devenv_directory
