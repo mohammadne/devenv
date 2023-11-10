@@ -1,6 +1,7 @@
 ---
 - name: Install requirements
   ansible.builtin.apt:
+    update_cache: yes
     pkg:
     - locales
     - python3.11
@@ -10,7 +11,7 @@
 
 - name: Define workspace path variable
   set_fact:
-    workspace: "/tmp/workspace"
+    workspace: "/opt/workspace"
 
 - name: ensure workspace directory exists
   file:
@@ -47,11 +48,11 @@
     daemon_reload: yes
     name: bombsquad
 
-- name: Rgister status of service
+- name: Register status of the service
   systemd:
     name: bombsquad
-  register: result
+  register: status_result
 
 - name: Get process PID
   ansible.builtin.debug:
-    msg: "process has been started sucessfully with PID: {{ result.status.MainPID }}"
+    msg: "process has been started sucessfully with PID: {{ status_result.status.MainPID }}"
