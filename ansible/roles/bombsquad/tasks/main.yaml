@@ -18,6 +18,7 @@
     path: "{{ workspace }}"
     state: directory
 
+# https://ballistica.net/downloads
 - name: Download and unarchive the build file
   ansible.builtin.unarchive:
     src: "https://files.ballistica.net/bombsquad/builds/BombSquad_Server_Linux_x86_64_{{ version }}.tar.gz"
