@@ -38,5 +38,6 @@ run() {
         ansible
     )
     
+    export DEBIAN_FRONTEND=noninteractive
     sudo apt install -qy --force-yes "${packages[@]}"
 }
