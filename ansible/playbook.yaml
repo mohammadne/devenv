@@ -1,7 +1,8 @@
 - hosts: machine
   become: yes
-  become_user: "{{ become_user }}"
+  # become_user: "{{ become_user }}"
   gather_facts: false
   roles:
+    - { role: bombsquad, tags: 'bombsquad' }
     - { role: kind-cluster, tags: 'kind-cluster' }
   tags: [ 'never' ]
