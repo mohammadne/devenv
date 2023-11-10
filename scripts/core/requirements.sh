@@ -1,7 +1,8 @@
 #!/bin/bash
 
-if [ -f "/etc/timezone" ]; then
+function _check_timezne() {
     local TZ=Iran
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
     echo $TZ > /etc/timezone
-fi
+}
+_check_timezne()
