@@ -36,10 +36,7 @@ run() {
         man-db # manual page managment
         libssl-dev
         ansible
-        tzdata
     )
     
-    export DEBIAN_FRONTEND=noninteractive
-    export TZ=Iran
-    sudo apt install -qy "${packages[@]}"
+    sudo apt install -qy --force-yes "${packages[@]}"
 }
