@@ -3,14 +3,6 @@
 # install packages non-interactively
 export DEBIAN_FRONTEND=noninteractive
 
-# configure system timezone
-function _configure_timezone() {
-    local TZ=Iran
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
-    echo $TZ > /etc/timezone
-}
-_configure_timezone
-
 # install base packages for having a working system
 function _base_packages() {
     local packages=(
@@ -30,3 +22,11 @@ function _base_packages() {
     apt update && apt install -qy "sudo" "${packages[@]}"
 }
 _base_packages
+
+# configure system timezone
+function _configure_timezone() {
+    local TZ=Iran
+    sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+    sudo echo $TZ > /etc/timezone
+}
+_configure_timezone
