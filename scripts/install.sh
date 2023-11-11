@@ -20,11 +20,11 @@ function set_command() {
         print_error "set" "invalid number of arguments"
         help;
     fi
-
+    
     source_values $1
 }
 
-# Parse arguments 
+# Parse arguments
 while [ $# -gt 0 ]; do
     case $1 in
         --help) help_command ;;
@@ -35,17 +35,17 @@ done
 
 function install_module() {
     local module=$1
-
+    
     source "$scripts_directory/modules/$module.sh" 2>/dev/null || {
         print_error $module "404 module not found -(("
         return
     }
-
+    
     if declare -f run &> /dev/null; then
         if declare -f info &> /dev/null; then
             print_message $module $(info)
         fi
-
+        
         if ! run $module; then
             print_error $module "exited with an error, exiting the installer ..."
             exit 1
@@ -54,9 +54,6 @@ function install_module() {
         print_warning $module "run function not found, there is nothing to do"
     fi
 }
-
-print_message "base" "ensure base packages and tools has been installed"
-install_module "packages/base" && echo
 
 print_message "dotfiles" "ensure dotfiles repository is present with the latest changes"
 ensure_dotfiles "dotfiles" && echo

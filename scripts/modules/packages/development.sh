@@ -5,7 +5,7 @@ info() {
 }
 
 run() {
-    local packages=(
+    local common_packages=(
         # ------------------------------------------------ editors
         
         bat # cat alternative
@@ -29,7 +29,7 @@ run() {
         speedtest-cli # speedtest cli
         ncat # ncat from nmap (not Open-BSD)
         telnet # interactive communication with another host
-        tcpdump tshark # dump traffic on a network
+        tcpdump # dump traffic on a network
         
         # ------------------------------------------------ miscellaneous
         
@@ -38,5 +38,22 @@ run() {
         ansible
     )
     
-    sudo apt install -qy --force-yes "${packages[@]}"
+    sudo apt install -qy --force-yes "${common_packages[@]}"
+    
+    if [ $graphical = false ]; then
+        print_warning $1 "skip installing graphical packages"
+        return
+    fi
+    
+    local graphical_packages=(
+        # firefox
+        # vscode
+        # wireshark
+        obs-studio # Open Broadcaster Software
+        # packet-tracer
+        # postman
+        tshark wireshark # dump traffic on a network
+    )
+    
+    sudo apt install -qy "${packages[@]}"
 }
