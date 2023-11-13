@@ -30,6 +30,7 @@ run() {
         ncat # ncat from nmap (not Open-BSD)
         telnet # interactive communication with another host
         tcpdump # dump traffic on a network
+        conntrack # track the connections
         
         # ------------------------------------------------ miscellaneous
         
