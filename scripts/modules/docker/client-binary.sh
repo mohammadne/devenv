@@ -6,9 +6,8 @@ info() {
 
 run() {
     local binary_path="/usr/local/bin/docker"
-    local architecture=$(system_architecture)
     local version="24.0.4"
-    local url="https://download.docker.com/linux/static/stable/$architecture/docker-$version.tgz"
+    local url="https://download.docker.com/linux/static/stable/x86_64/docker-$version.tgz"
 
     if check_versioned_binary $1 $binary_path $version "--version"; then return; fi
     if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi

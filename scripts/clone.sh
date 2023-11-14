@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function ensure_dotfiles() {
+function clone_devenv() {
     local module=$1
     local remote_https="https://github.com/$dotfiles_repository.git"
     local remote_ssh="git@github.com:$dotfiles_repository.git"
