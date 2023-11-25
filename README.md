@@ -33,3 +33,4 @@ Here is a list of works, tools or packages that I want to explore or fix them
 - <https://github.com/denisidoro/navi>
 - add terraform binary installation
 - needs to run `eval "$(ssh-agent)"` and `ssh-add path-to-key` everythime before running compose
+- grub splash issue related to initramfs <https://www.reddit.com/r/Ubuntu/comments/umxg0v/how_to_hide_boot_log/> for disabiling splash logs
