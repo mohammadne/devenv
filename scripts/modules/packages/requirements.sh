@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# install packages non-interactively
-export DEBIAN_FRONTEND=noninteractive
+function info() {
+    echo -n "install required packages for having a working system"
+}
 
-# install base packages for having a working system
-function _base_packages() {
+function run() {
     local packages=(
         git
         ca-certificates
@@ -21,12 +21,3 @@ function _base_packages() {
     print_warning $1 "sudo has been missed, trying to install it"
     apt update && apt install -qy "sudo" "${packages[@]}"
 }
-_base_packages
-
-# configure system timezone
-function _configure_timezone() {
-    local TZ=Iran
-    sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
-    sudo echo $TZ > /etc/timezone
-}
-_configure_timezone

@@ -6,6 +6,7 @@ COPY . $WORKDIR/devenv
 
 RUN /opt/workspace/devenv/scripts/install.sh \
     --set "DOTFILES_DIRECTORY=$WORKDIR/dotfiles" \
+    --set "GRAPHICAL=false" \
     "zsh" "vim" "tmux" \
     "packages/development" \
     "docker/client-binary" \
