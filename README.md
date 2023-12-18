@@ -6,9 +6,10 @@ Provisioner for setup a tailored environment for development
 
 ## Usage
 
+![Fedora Compatibility](https://img.shields.io/badge/works%20on-fedora-white?logo=fedora&style=for-the-badge)
 ![Ubuntu Compatibility](https://img.shields.io/badge/works%20on-ubuntu-white?logo=ubuntu&style=for-the-badge)
 
-> **_NOTE:_** I'm using Ubuntu as my personal OS (normally latest version for my desktop and latest LTS version for my server) and this provisioner repository (devenv) is written and tested based on them.
+> **_NOTE:_** I'm using Fedora as my desktop OS and Ubuntu as my development server choice and this provisioner repository (devenv) is written and tested based on them.
 
 ```sh
 devenv_directory=$HOME/Develop/devenv
@@ -25,13 +26,3 @@ ssh-add ~/.ssh/github_ed25519
 
 docker compose run devenv
 ```
-
-## TODOs and Wishlists
-
-Here is a list of works, tools or packages that I want to explore or fix them
-
-- https://github.com/denisidoro/navi
-- add terraform binary installation
-- needs to run `eval "$(ssh-agent)"` and `ssh-add path-to-key` everythime before running compose
-- grub splash issue related to initramfs <https://www.reddit.com/r/Ubuntu/comments/umxg0v/how_to_hide_boot_log/> for disabiling splash logs
-- https://github.com/yt-dlp/yt-dlp

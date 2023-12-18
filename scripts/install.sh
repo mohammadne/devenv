@@ -1,67 +1,81 @@
 #!/bin/bash
 
-__help="
-Install modules based on role of the environment you are passing.
-
-Usage: $(basename $0) ROLE [OPTIONS]
-
-Roles:
-  desktop                     Install modules for desktop environment with GUI
-  server                      Install modules for server environment without GUI
-  container                   Install modules for building OCI Image (normally can be used in CI)
-
-Options:
-  --help                      Show help menu
-"
-
-# error if argument is not equal to one
-if [ "$#" -ne 1 ]; then
-    echo "$__help" && exit 1
-fi
-
-case $1 in
-    --help) echo "$__help"; exit 0 ;;
-
-    desktop)
-        arguments=(
-            --set "DOTFILES_DIRECTORY=$WORKDIR/dotfiles"
-            --set "GRAPHICAL=true"
-            "zsh" "vim" "tmux"
-            "packages/development"
-            "docker/client-binary"
-            "kubernetes/helm" "kubernetes/helmsman" "kubernetes/kind" "kubernetes/kubectl" "kubernetes/sops" "kubernetes/telepresence"
-            "languages/go" "languages/rust"
-        )
-        ;;
-
-    server)
-        arguments=(
-            --set "DOTFILES_DIRECTORY=$WORKDIR/dotfiles"
-            --set "GRAPHICAL=false"
-            "zsh" "vim" "tmux"
-            "packages/development"
-            "docker/client-binary"
-            "kubernetes/helm" "kubernetes/helmsman" "kubernetes/kind" "kubernetes/kubectl" "kubernetes/sops" "kubernetes/telepresence"
-            "languages/go" "languages/rust"
-        )
-        ;;
-
-    container)
-        arguments=(
-            --set "DOTFILES_DIRECTORY=$WORKDIR/dotfiles"
-            --set "GRAPHICAL=false"
-            "zsh" "vim" "tmux"
-            "packages/development"
-            "docker/client-binary"
-            "kubernetes/helm" "kubernetes/helmsman" "kubernetes/kind" "kubernetes/kubectl" "kubernetes/sops" "kubernetes/telepresence"
-            "languages/go" "languages/rust"
-        )
-        ;;
-
-    *) echo "$__help"; exit 1 ;;
-esac
-
 # findout scripts directory path
 scripts_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")"/. && pwd)"
+program=$(basename $0)
 
-source "$scripts_directory/main.sh" "${arguments[@]}"
+# source required files (core files are needed inside library files)
+for core_file in "$scripts_directory/core"/*; do source "$core_file"; done
+for library_file in "$scripts_directory/library"/*; do source "$library_file"; done
+
+source_values "$scripts_directory/values.env"
+
+# handle sigterm traps and display handy message
+trap "echo see you in a better tomorrow [you signal $program execuation]; exit" INT
+
+# ensure we are using Fedora distribution
+ensure_fedora $program
+
+function _usage() {
+    echo ""
+    echo "usage: $program MODULES [OPTIONS]"
+    echo ""
+    echo "options:"
+    echo "  --usage   show usage menu again"
+    echo "  --set     set environment variables specified in values.env"
+    echo ""
+    echo "modules:"
+    echo "$(
+        find "$scripts_directory/modules" -type f -name "*.sh" \
+        -exec sh -c 'echo "  $(dirname "{}")/$(basename "{}" .sh)"' \; \
+        | sed "s|$scripts_directory/modules/||"
+    )"
+}
+
+while [ $# -gt 0 ]; do
+    case $1 in
+        --usage) _usage; exit 0 ;;
+        
+        --set)
+            if [ $# -lt 2 ]; then
+                print_error "--set" "exactly one argument should be passed"
+                _usage && exit 1
+            fi
+            source_values $2
+            shift 2
+        ;;
+        
+        *) modules_list+=("$1"); shift ;;
+    esac
+done
+
+print_message "dotfiles" "ensure dotfiles repository is present with latest changes"
+full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_https $dotfiles_remote_ssh
+
+# add necessary modules to be installed before user-passed modules
+modules_list=("packages/requirements" "system/timezone" "${modules_list[@]}")
+
+for module in "${modules_list[@]}"; do
+    echo $module
+    continue
+    
+    source "$scripts_directory/modules/$module.sh" 2>/dev/null || {
+        print_error $module "404 module not found -(("
+        return
+    }
+    
+    if declare -f run &> /dev/null; then
+        if declare -f info &> /dev/null; then
+            print_message $module $(info)
+        fi
+        
+        if ! run $module; then
+            print_error $module "exited with an error, exiting the installer ..."
+            exit 1
+        fi
+    else
+        print_warning $module "run function not found, there is nothing to do"
+    fi
+done
+
+echo && print_success "devenv" "all of the modules have been installed sucessfully"
