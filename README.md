@@ -12,10 +12,10 @@ Provisioner for setup a tailored environment for development
 > **_NOTE:_** I'm using Fedora as my desktop OS and Ubuntu as my development server choice and this provisioner repository (devenv) is written and tested based on them.
 
 ```sh
-devenv_directory=$HOME/Develop/devenv
-mkdir -p "$(dirname $devenv_directory)"
-git clone https://github.com/mohammadne/devenv.git $devenv_directory
-cd $devenv_directory && git remote set-url origin git@github.com:mohammadne/devenv.git
+# specify your preferred location for cloning after '--' at the end of the script below
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/mohammadne/devenv/main/scripts/clone.sh)"
+
+cd $HOME/Documents/workspace/devenv && ./scripts/install.sh 
 ```
 
 ## run

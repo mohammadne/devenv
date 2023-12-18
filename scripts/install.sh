@@ -57,7 +57,6 @@ modules_list=("packages/requirements" "system/timezone" "${modules_list[@]}")
 
 for module in "${modules_list[@]}"; do
     echo $module
-    continue
     
     source "$scripts_directory/modules/$module.sh" 2>/dev/null || {
         print_error $module "404 module not found -(("
