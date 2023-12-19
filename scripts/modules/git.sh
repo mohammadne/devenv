@@ -5,7 +5,7 @@ info() {
 }
 
 run() {
-    sudo apt install -qy git
+    sudo dnf install -qy git
 
     linker $1 "$dotfiles_directory/git" "$HOME/.config/git"
 }

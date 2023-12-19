@@ -5,7 +5,6 @@ function info() {
 }
 
 function run() {
-    local TZ=Iran
-    sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
-    sudo echo $TZ > /etc/timezone
+    sudo dnf install -qy "systemd"
+    timedatectl set-timezone "Asia/Tehran"
 }

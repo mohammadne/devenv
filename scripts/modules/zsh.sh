@@ -5,7 +5,7 @@ info() {
 }
 
 run() {
-    sudo apt install -qy zsh curl
+    sudo dnf install -qy zsh
 
     export ZDOTDIR="$HOME/.config/zsh"
     add_zdotdir $ZDOTDIR # add zdotdir value to the global zshenv file
@@ -32,7 +32,7 @@ run() {
 function add_zdotdir() {
     value="$1"
 
-    file="/etc/zsh/zshenv"
+    file="/etc/zshenv"
     key="export ZDOTDIR"
 
     # Check if the key exists in the last line

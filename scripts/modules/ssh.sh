@@ -5,7 +5,7 @@ info() {
 }
 
 run() {
-    sudo apt install -qy openssh-client
+    sudo dnf install -qy openssh
 
     linker $1 "$dotfiles_directory/ssh" "$HOME/.ssh"
     _generate_ssh_keys $1

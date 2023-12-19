@@ -15,7 +15,8 @@ Provisioner for setup a tailored environment for development
 # specify your preferred location for cloning after '--' at the end of the script below
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/mohammadne/devenv/main/scripts/clone.sh)"
 
-cd $HOME/Documents/workspace/devenv && ./scripts/install.sh 
+# change to your devenv directory and install required packages
+cd $HOME/Documents/workspace/devenv && ./scripts/install.sh git ssh
 ```
 
 ## run

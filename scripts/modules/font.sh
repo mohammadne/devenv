@@ -5,7 +5,7 @@ info() {
 }
 
 run() {
-    sudo apt install -qy fontconfig
+    sudo dnf install -qy fontconfig
 
     _fira_code
 }
@@ -28,7 +28,7 @@ function _fira_code() {
     mkdir -p $font_home && cd $font_home
 
     for weight in $font_weights; do
-        curl -fLo "$weight.ttf" "$font_repository/blob/$font_repository_release/patched-fonts/$font_family/$weight/complete/Fira%20Code%20$weight%20Nerd%20Font%20Complete.ttf"
+        curl --silent -fLo "$weight.ttf" "$font_repository/blob/$font_repository_release/patched-fonts/$font_family/$weight/complete/Fira%20Code%20$weight%20Nerd%20Font%20Complete.ttf"
     done
 
     # reset font cache

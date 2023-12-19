@@ -8,8 +8,9 @@ function run() {
     local packages=(
         git
         ca-certificates
-        openssh-client
-        tzdata # timezone
+        openssh
+        wget
+        curl
     )
     
     if command -v sudo &> /dev/null; then
