@@ -10,10 +10,12 @@ run() {
     _fira_code
 }
 
-
+# TODO: use new release download from zip file
+# https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip
+# curl -> unzip -> delete original
 function _fira_code() {
     font_family="FiraCode"
-    font_weights="Bold SemiBold Medium Regular Light"
+    font_weights="Bold Medium Regular Light"
 
     font_repository="https://github.com/ryanoasis/nerd-fonts"
     font_repository_release="v2.1.0"
@@ -28,7 +30,8 @@ function _fira_code() {
     mkdir -p $font_home && cd $font_home
 
     for weight in $font_weights; do
-        curl --silent -fLo "$weight.ttf" "$font_repository/blob/$font_repository_release/patched-fonts/$font_family/$weight/complete/Fira%20Code%20$weight%20Nerd%20Font%20Complete.ttf"
+        echo "$font_repository/blob/$font_repository_release/patched-fonts/$font_family/$weight/complete/Fira%20Code%20$weight%20Nerd%20Font%20Complete.ttf"
+        # curl -SLo "$weight.ttf" "$font_repository/blob/$font_repository_release/patched-fonts/$font_family/$weight/complete/Fira%20Code%20$weight%20Nerd%20Font%20Complete.ttf"
     done
 
     # reset font cache

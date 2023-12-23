@@ -5,7 +5,7 @@ info() {
 }
 
 run() {
-    local common_packages=(
+    local packages=(
         # ------------------------------------------------ editors
         
         bat # cat alternative
@@ -37,16 +37,6 @@ run() {
         man-db # manual page managment
         libssl-dev
         ansible
-    )
-    
-    sudo apt install -qy --force-yes "${common_packages[@]}"
-    
-    if [ $graphical = false ]; then
-        print_warning $1 "skip installing graphical packages"
-        return
-    fi
-    
-    local graphical_packages=(
         # firefox
         # vscode
         # wireshark
@@ -56,5 +46,5 @@ run() {
         tshark wireshark # dump traffic on a network
     )
     
-    sudo apt install -qy "${packages[@]}"
+    sudo dnf install -qy "${packages[@]}"
 }

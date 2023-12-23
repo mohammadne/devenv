@@ -50,7 +50,7 @@ while [ $# -gt 0 ]; do
 done
 
 print_message "dotfiles" "ensure dotfiles repository is present with latest changes"
-full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_https $dotfiles_remote_ssh
+# full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_https $dotfiles_remote_ssh
 
 # add necessary modules to be installed before user-passed modules
 modules_list=("packages/requirements" "${modules_list[@]}")

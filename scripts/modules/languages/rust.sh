@@ -25,5 +25,4 @@ _install_rust_dependencies() {
     $cargo_binary install --features=ssl websocat # webSocket client
     $cargo_binary install bandwhich # displaying network utilization
     $cargo_binary install dua-cli  # disk Usage Analyzer
-    $cargo_binary install jless  # JSON viewer
 }

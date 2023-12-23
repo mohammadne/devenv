@@ -16,11 +16,11 @@ function run() {
 
     if command -v sudo &> /dev/null; then
         sudo dnf install -qy "${packages[@]}"
-        sudo dnf groupinstall "Development Tools"
+        sudo dnf groupinstall -qy "Development Tools"
         return
     fi
 
     print_warning $1 "sudo has been missed, trying to install it"
     dnf install -qy "sudo" "${packages[@]}"
-    dnf groupinstall "Development Tools"
+    dnf groupinstall -qy "Development Tools"
 }
