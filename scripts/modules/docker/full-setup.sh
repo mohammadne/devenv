@@ -12,3 +12,5 @@ run() {
     
     sudo systemctl start docker
 }
+
+# add docker contexts
