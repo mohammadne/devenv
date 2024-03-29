@@ -50,13 +50,13 @@ while [ $# -gt 0 ]; do
 done
 
 print_message "dotfiles" "ensure dotfiles repository is present with latest changes"
-# full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_https $dotfiles_remote_ssh
+full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_https $dotfiles_remote_ssh
 
 # add necessary modules to be installed before user-passed modules
 modules_list=("packages/requirements" "${modules_list[@]}")
 
 for module in "${modules_list[@]}"; do
-    echo $module
+    echo
     
     source "$scripts_directory/modules/$module.sh" 2>/dev/null || {
         print_error $module "404 module not found -(("
