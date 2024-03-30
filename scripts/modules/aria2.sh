@@ -1,11 +1,10 @@
 #!/bin/bash
 
 info() {
-	echo -n "install aria2 download manager"
+  echo -n "install aria2 download manager"
 }
 
 run() {
-    sudo apt install -qy aria2
-
-    linker $1 "$dotfiles_directory/aria2" "$HOME/.aria2"
+  sudo dnf install aria2 -qy
+  linker $1 "$dotfiles_directory/aria2" "$HOME/.aria2"
 }

@@ -6,11 +6,6 @@ function info() {
 
 function run() {
   local packages=(
-    # repositories
-    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm
-    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
-    
-    # packages
     git
     ca-certificates
     openssh
@@ -18,7 +13,6 @@ function run() {
     curl
     gcc cmake
     unzip
-    ffmpeg
   )
   
   if command -v sudo &> /dev/null; then
