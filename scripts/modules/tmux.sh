@@ -5,7 +5,8 @@ info() {
 }
 
 run() {
-  sudo dnf install -qy tmux tmuxp
+  sudo dnf install -qy tmux
+  # install tmuxp
   
   linker $1 "$dotfiles_directory/tmux" "$HOME/.config/tmux"
   

@@ -53,7 +53,7 @@ print_message "dotfiles" "ensure dotfiles repository is present with latest chan
 full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_https $dotfiles_remote_ssh
 
 # add necessary modules to be installed before user-passed modules
-modules_list=("packages/requirements" "${modules_list[@]}")
+modules_list=( "${modules_list[@]}")
 
 for module in "${modules_list[@]}"; do
   echo

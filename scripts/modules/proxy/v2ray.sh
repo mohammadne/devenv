@@ -7,7 +7,7 @@ info() {
 # https://gist.github.com/mahmoud-eskandari/960899f3494a1bffa1a29631dbaf0aee#file-install-bridge-sh-L36
 
 run() {
-  local binary_path="/usr/local/v2ray-core/v2ray"
+  local binary_path="/usr/local/v2ray/v2ray"
   local version="v5.14.1"
   local url="https://github.com/v2fly/v2ray-core/releases/download/${version}/v2ray-linux-64.zip"
   
@@ -30,7 +30,7 @@ User=nobody
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/local/v2ray-core/v2ray run
+ExecStart=/usr/local/v2ray/v2ray run
 Restart=on-failure
 RestartPreventExitStatus=23
 

@@ -5,7 +5,7 @@ info() {
 }
 
 run() {
-  sudo dnf install -qy zsh
+  sudo dnf install -qy zsh exa bat
   
   export ZDOTDIR="$HOME/.config/zsh"
   add_zdotdir $ZDOTDIR # add zdotdir value to the global zshenv file
