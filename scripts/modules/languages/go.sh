@@ -26,9 +26,9 @@ _config_go() {
   
   print_message $1 "set go environments"
   $go_binary env -w GOPATH="$HOME/.go"
-  $go_binary env -w GOPROXY="https://goproxy.io,goproxy.cn,direct"
-  $go_binary env -w GONOSUMDB="git.cafebazaar.ir"
-  $go_binary env -w GOPRIVATE="git.cafebazaar.ir"
+  $go_binary env -w GOPROXY="https://goproxy.cn,direct"
+  $go_binary env -w GONOSUMDB="gitlab.tasn.ir"
+  $go_binary env -w GOPRIVATE="gitlab.tasn.ir"
 }
 
 _install_go_dependencies() {

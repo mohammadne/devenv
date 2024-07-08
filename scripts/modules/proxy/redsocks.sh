@@ -1,25 +1,33 @@
 #!/bin/bash
 
 info() {
-  echo -n "setup and install openconnect"
+  echo -n "setup and install redsocks"
 }
 
 run() {
-  sudo dnf install openconnect -y
+  sudo dnf install redsocks -y
   
-  ## create openconnect configuration files
-  sudo mkdir -p /etc/openconnect
   
-  sudo bash -c 'cat <<EOF > /etc/openconnect/asansaz.conf
-# VPN server URL
-export openconnect_asansaz_server = https://server.com
+  sudo bash -c 'cat <<EOF > /etc/redsocks.conf
+base {
+  log_debug = on;
+  log_info = on;
+  log = "file:/var/log/redsocks.log";
 
-# User credentials
-export openconnect_asansaz_user = your-username
-export openconnect_asansaz_password = your-password
+  daemon = on;
 
-# Additional options
-export openconnect_asansaz_servercert = pin-sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  redirector = iptables;
+}
+
+redsocks {
+  local_ip = 0.0.0.0;
+  local_port = 12345;
+
+  ip = 127.0.0.1;
+  port = 11809;
+
+  type = http-connect;
+}
 EOF'
   
   sudo bash -c 'cat <<EOF > /etc/systemd/system/openconnect-asansaz.service
