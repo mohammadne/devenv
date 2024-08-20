@@ -13,7 +13,7 @@ run() {
 }
 
 _install_go() {
-  local version="1.22.1"
+  local version="1.23.0"
   local url="https://go.dev/dl/go${version}.linux-amd64.tar.gz"
   
   if check_versioned_binary $1 "$2/bin/go" $version "version"; then return; fi
@@ -38,15 +38,15 @@ _install_go_dependencies() {
   $go_binary install github.com/cweill/gotests/gotests@v1.6.0 # Generate unit tests
   $go_binary install github.com/fatih/gomodifytags@v1.16.0 # Modify tags on structs
   $go_binary install github.com/josharian/impl@v1.1.0 # Stubs for interfaces
-  $go_binary install github.com/haya14busa/goplay/cmd/goplay@v1.0.0 # The Go playground
   $go_binary install github.com/go-delve/delve/cmd/dlv@latest # Go debugger (Delve)
-  $go_binary install honnef.co/go/tools/cmd/staticcheck@latest # Linter
-  # require_go github.com/golangci/golangci-lint/cmd/golangci-lint
-  # require_go mvdan.cc/gofumpt
-  # require_go golang.org/x/tools/cmd/goimports
-  # require_go golang.org/dl/gotip
+  $go_binary install github.com/golangci/golangci-lint/cmd/golangci-lint@latest # Linter
   
   print_message $1 "install useful dependencies"
+  # $go_binary install github.com/haya14busa/goplay/cmd/goplay@v1.0.0 # The Go playground
+  # $go_binary install honnef.co/go/tools/cmd/staticcheck@latest
+  # $go_binary install mvdan.cc/gofumpt
+  # $go_binary install golang.org/x/tools/cmd/goimports
+  # $go_binary install golang.org/dl/gotip
   # $go_binary install github.com/onsi/ginkgo/v2/ginkgo@v2.11.0
   # $go_binary install github.com/charmbracelet/glow@latest # render markdown
   $go_binary install github.com/mikefarah/yq/v4@latest

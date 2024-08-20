@@ -5,6 +5,8 @@ info() {
 }
 
 run() {
+  sudo dnf install -qy gcc
+
   export RUSTUP_HOME="$HOME/.rustup"
   export CARGO_HOME="$HOME/.cargo"
   
