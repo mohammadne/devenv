@@ -5,10 +5,13 @@ info() {
 }
 
 run() {
-  sudo dnf install -qy openssh
-  
   linker $1 "$dotfiles_directory/ssh" "$HOME/.ssh"
   _generate_ssh_keys $1
+  
+  if [ "$is_initialized" -eq 1 ]; then
+    print_message $1 "Waiting because of initialize mode. Press Enter to continue..."
+    read
+  fi
 }
 
 function _generate_ssh_keys() {
