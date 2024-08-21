@@ -58,15 +58,14 @@ function _install() {
   done
 }
 
-is_initialized=0
+is_initializing=0
 
 while [ $# -gt 0 ]; do
   case $1 in
     --usage) _usage; exit 0 ;;
     
     --initialize)
-      is_initialized=1
-      _install ssh
+      is_initializing=1
       shift
     ;;
     
@@ -83,10 +82,11 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+start_initializing "initializer" $is_initializing
 print_message "dotfiles" "ensure dotfiles repository is present with latest changes"
-full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_https $dotfiles_remote_ssh
+full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_url
 
-# add necessary modules to be installed before user-passed modules
 modules_list=( "${modules_list[@]}")
+_install $modules_list
 
 echo && print_success "devenv" "all of the modules have been installed sucessfully"

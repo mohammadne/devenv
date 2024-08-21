@@ -16,7 +16,7 @@ Provisioner for setup a tailored environment for development
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/mohammadne/devenv/main/scripts/clone.sh)"
 
 # change to your devenv directory and initialize the dotfiles
-cd $HOME/Workspace/personal/devenv && ./scripts/install.sh --initialize
+cd $HOME/Workspace/personal/devenv && ./scripts/install.sh --initialize ssh
 ```
 
 ## run
