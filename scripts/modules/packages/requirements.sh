@@ -8,7 +8,6 @@ function run() {
   local packages=(
     git
     ca-certificates
-    openssh
     wget
     curl
     gcc cmake
@@ -24,4 +23,7 @@ function run() {
   print_warning $1 "sudo has been missed, trying to install it"
   dnf install -qy "sudo" "${packages[@]}"
   dnf groupinstall -qy "Development Tools"
+  
+  # add rpm-fusion free repository
+  # sudo dnf swap ffmpeg-free ffmpeg --allowerasing
 }

@@ -11,6 +11,7 @@ run() {
   sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin --allowerasing
   
   sudo systemctl start docker
+  sudo systemctl enable docker
   
   sudo groupadd docker # Create the docker group.
   sudo usermod -aG docker $USER # Add your user to the docker group.
