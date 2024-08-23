@@ -86,7 +86,6 @@ start_initializing "initializer" $is_initializing
 print_message "dotfiles" "ensure dotfiles repository is present with latest changes"
 full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_url
 
-modules_list=( "${modules_list[@]}")
-_install $modules_list
+_install "${modules_list[@]}"
 
 echo && print_success "devenv" "all of the modules have been installed sucessfully"

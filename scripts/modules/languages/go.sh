@@ -34,6 +34,7 @@ _config_go() {
 _install_go_dependencies() {
   local go_binary="$2/bin/go"
   
+  print_message $1 "install required go dependencies"
   $go_binary install golang.org/x/tools/gopls@latest # Language server from google
   $go_binary install github.com/cweill/gotests/gotests@v1.6.0 # Generate unit tests
   $go_binary install github.com/fatih/gomodifytags@v1.16.0 # Modify tags on structs
@@ -41,7 +42,8 @@ _install_go_dependencies() {
   $go_binary install github.com/go-delve/delve/cmd/dlv@latest # Go debugger (Delve)
   $go_binary install github.com/golangci/golangci-lint/cmd/golangci-lint@latest # Linter
   
-  print_message $1 "install useful dependencies"
+  print_message $1 "install useful go dependencies"
+  $go_binary install github.com/mikefarah/yq/v4@latest
   # $go_binary install github.com/haya14busa/goplay/cmd/goplay@v1.0.0 # The Go playground
   # $go_binary install honnef.co/go/tools/cmd/staticcheck@latest
   # $go_binary install mvdan.cc/gofumpt
@@ -49,5 +51,4 @@ _install_go_dependencies() {
   # $go_binary install golang.org/dl/gotip
   # $go_binary install github.com/onsi/ginkgo/v2/ginkgo@v2.11.0
   # $go_binary install github.com/charmbracelet/glow@latest # render markdown
-  $go_binary install github.com/mikefarah/yq/v4@latest
 }
