@@ -39,6 +39,9 @@ run() {
     gstreamer1-plugin-openh264
     mozilla-openh264
     ffmpeg
+    x265-libs libde265
+    libheif # open heif pictures (via sumsung)
+    eog
     
     # ------------------------------------------------ miscellaneous
     

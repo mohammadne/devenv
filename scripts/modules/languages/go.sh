@@ -29,6 +29,7 @@ _config_go() {
   $go_binary env -w GOPROXY="https://goproxy.cn,direct"
   $go_binary env -w GONOSUMDB="gitlab.tasn.ir"
   $go_binary env -w GOPRIVATE="gitlab.tasn.ir"
+  $go_binary env -w CGO_ENABLED="1"
 }
 
 _install_go_dependencies() {

@@ -6,7 +6,7 @@ info() {
 
 run() {
   local binary_path="/usr/local/bin/kind"
-  local version="v0.23.0"
+  local version="v0.24.0"
   local url="https://github.com/kubernetes-sigs/kind/releases/download/$version/kind-linux-amd64"
   
   if check_versioned_binary $1 $binary_path $version "version"; then return; fi
