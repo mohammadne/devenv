@@ -8,8 +8,8 @@ run() {
   local version="1.15.15"
   _install_gopass $1 $version
   _install_gopass_jsonapi $1 $version
-  
-  gopass clone --path $HOME/Workspace/personal/credentials git@github.com:mohammadne/credentials.git
+
+  linker $1 "$dotfiles_directory/gopass/config" "$HOME/.config/gopass/config"
   gopass-jsonapi configure --browser firefox
 }
 

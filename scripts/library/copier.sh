@@ -28,6 +28,6 @@ function copier() {
     print_warning $module "remove pre-exsisting dst_path file (directory)"
     rm -Rf "$dst_path"
   fi
-  
-  cp -r "$src_path" "$dst_path"
+
+  cp -R "$src_path" "$dst_path"
 }
