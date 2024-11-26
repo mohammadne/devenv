@@ -58,16 +58,9 @@ function _install() {
   done
 }
 
-is_initializing=0
-
 while [ $# -gt 0 ]; do
   case $1 in
     --usage) _usage; exit 0 ;;
-    
-    --initialize)
-      is_initializing=1
-      shift
-    ;;
     
     --set)
       if [ $# -lt 2 ]; then
@@ -82,7 +75,6 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-start_initializing "initializer" $is_initializing
 print_message "dotfiles" "ensure dotfiles repository is present with latest changes"
 full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_url
 
