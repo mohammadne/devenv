@@ -13,7 +13,7 @@ run() {
 }
 
 _install_go() {
-  local version="1.23.0"
+  local version="1.23.3"
   local url="https://go.dev/dl/go${version}.linux-amd64.tar.gz"
   
   if check_versioned_binary $1 "$2/bin/go" $version "version"; then return; fi

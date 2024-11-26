@@ -13,7 +13,7 @@ run() {
     
     bat # cat alternative
     exa # modern replacement for ls
-    clipman # clipboard
+    xclip clipman # clipboards
     jq # json files utilities
     fzf # fuzzy finder
     

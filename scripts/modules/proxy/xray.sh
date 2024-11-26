@@ -7,38 +7,39 @@ info() {
 # https://gist.github.com/mahmoud-eskandari/960899f3494a1bffa1a29631dbaf0aee#file-install-bridge-sh-L36
 
 run() {
-  local binary_path="/usr/local/xray/xray"
-  local version="v1.8.10"
-  local url="https://github.com/XTLS/Xray-core/releases/download/${version}/Xray-linux-64.zip"
+  # podman is required for the installation
   
-  if check_versioned_binary $1 $binary_path $version "version"; then return; fi
-  if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
-  sudo unzip -d $(dirname $binary_path) $result && rm -rf "$result"
+  copier "$dotfiles_directory/xray" "$HOME/.config"
   
-  ## create log files
-  sudo mkdir -p /var/log/xray
-  sudo chmod -R 777 /var/log/xray/
-  
-    sudo bash -c 'cat <<EOF > /etc/systemd/system/xray.service
-[Unit]
-Description=Xray Service
-Documentation=https://www.v2fly.org/
-After=network.target nss-lookup.target
+  proxy_info=$(gopass show proxy/xray)
+  _replace_notls_credentials $1 $proxy_info
+  _replace_reality_credentials $1 $proxy_info
+}
 
-[Service]
-User=nobody
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/local/xray/xray run -c /usr/local/xray/config.json
-Restart=on-failure
-RestartPreventExitStatus=23
-
-[Install]
-WantedBy=multi-user.target
-EOF'
+_replace_notls_credentials() {
+  local notls_local_port=$( echo $2 | grep 'notls_local_port: ' | awk -F ': ' '{print $2}' )
+  local notls_remote_host=$( echo $2 | grep 'notls_remote_host: ' | awk -F ': ' '{print $2}' )
+  local notls_remote_port=$( echo $2 | grep 'notls_remote_port: ' | awk -F ': ' '{print $2}' )
+  local notls_user_id=$( echo $2 | grep 'notls_user_id: ' | awk -F ': ' '{print $2}' )
   
-  sudo systemctl daemon-reload
-  sudo systemctl enable xray
-  sudo systemctl restart xray
+  sed -i "s/{{local_port}}/${notls_local_port}/g" "$HOME/.config/xray/notls/docker-compose.json"
+  sed -i "s/{{local_port}}/${notls_local_port}/g" "$HOME/.config/xray/notls/config.json"
+  sed -i "s/{{remote_host}}/${notls_remote_host}/g" "$HOME/.config/xray/notls/config.json"
+  sed -i "s/{{remote_port}}/${notls_remote_port}/g" "$HOME/.config/xray/notls/config.json"
+  sed -i "s/{{user_id}}/${notls_user_id}/g" "$HOME/.config/xray/notls/config.json"
+}
+
+_replace_reality_credentials() {
+  local reality_local_port=$( echo $2 | grep 'reality_local_port: ' | awk -F ': ' '{print $2}' )
+  local reality_remote_host=$( echo $2 | grep 'reality_remote_host: ' | awk -F ': ' '{print $2}' )
+  local reality_remote_port=$( echo $2 | grep 'reality_remote_port: ' | awk -F ': ' '{print $2}' )
+  local reality_user_id=$( echo $2 | grep 'reality_user_id: ' | awk -F ': ' '{print $2}' )
+  local reality_public_key=$( echo $2 | grep 'reality_public_key: ' | awk -F ': ' '{print $2}' )
+  
+  sed -i "s/{{local_port}}/${reality_local_port}/g" "$HOME/.config/xray/reality/docker-compose.json"
+  sed -i "s/{{local_port}}/${reality_local_port}/g" "$HOME/.config/xray/reality/config.json"
+  sed -i "s/{{remote_host}}/${reality_remote_host}/g" "$HOME/.config/xray/reality/config.json"
+  sed -i "s/{{remote_port}}/${reality_remote_port}/g" "$HOME/.config/xray/reality/config.json"
+  sed -i "s/{{user_id}}/${reality_user_id}/g" "$HOME/.config/xray/reality/config.json"
+  sed -i "s/{{public_key}}/${reality_public_key}/g" "$HOME/.config/xray/reality/config.json"
 }

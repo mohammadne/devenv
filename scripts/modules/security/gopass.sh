@@ -5,15 +5,28 @@ info() {
 }
 
 run() {
-  # check go is installed
-  # check age is not installed (with specified version)
+  local version="v1.15.15"
+  _install_gopass $1 $version
+  _install_gopass_jsonapi $1 $version
   
-  local version="v1.15.13"
-  go install github.com/gopasspw/gopass@$version
-  go install github.com/gopasspw/gopass-jsonapi@$version
+  gopass clone --path $HOME/Workspace/personal/credentials git@github.com:mohammadne/credentials.git
+  gopass-jsonapi configure --browser firefox
+}
+
+_install_gopass() {
+  local binary_path="/usr/local/bin/gopass"
+  local url="https://github.com/gopasspw/gopass/releases/download/v${version}/helmsman_${version}_linux_amd64.tar.gz"
   
-  sudo dnf install -qy xclip
+  if check_versioned_binary $1 $binary_path $2 "-v"; then return; fi
+  if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
+  sudo tar -C $(dirname $binary_path) -xzf $result "helmsman" && rm -rf "$result"
+}
+
+_install_gopass_jsonapi() {
+  local binary_path="/usr/local/bin/gopass-jsonapi"
+  local url="https://github.com/gopasspw/gopass-jsonapi/releases/download/v${version}/helmsman_${version}_linux_amd64.tar.gz"
   
-  # gopass clone --path $HOME/Workspace/personal/credentials git@github.com:mohammadne/credentials.git
-  # gopass-jsonapi configure --browser firefox
+  if check_versioned_binary $1 $binary_path $2 "-v"; then return; fi
+  if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
+  sudo tar -C $(dirname $binary_path) -xzf $result "helmsman" && rm -rf "$result"
 }
