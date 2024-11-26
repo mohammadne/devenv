@@ -76,7 +76,7 @@ while [ $# -gt 0 ]; do
 done
 
 print_message "dotfiles" "ensure dotfiles repository is present with latest changes"
-full_clone "dotfiles" $dotfiles_directory $dotfiles_remote_url
+full_clone "dotfiles" $dotfiles_directory "github.com" $dotfiles_github_repository
 
 _install "${modules_list[@]}"
 
