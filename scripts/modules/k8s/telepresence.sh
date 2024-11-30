@@ -6,7 +6,7 @@ info() {
 
 run() {
   local binary_path="/usr/local/bin/telepresence"
-  local version="v2.18.0"
+  local version="v2.20.3"
   local url="https://github.com/telepresenceio/telepresence/releases/download/$version/telepresence-linux-amd64"
   
   if check_versioned_binary $1 $binary_path $version "version"; then return; fi

@@ -6,7 +6,7 @@ info() {
 
 run() {
   local binary_path="/usr/local/bin/helmsman"
-  local version="3.17.0"
+  local version="3.17.1"
   local url="https://github.com/Praqma/helmsman/releases/download/v${version}/helmsman_${version}_linux_amd64.tar.gz"
   
   if check_versioned_binary $1 $binary_path $version "-v"; then return; fi

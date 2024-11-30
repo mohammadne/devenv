@@ -10,7 +10,7 @@ run() {
   local _fonts_to_be_installed=("FiraCode")
   local _font_home="$HOME/.local/share/fonts"
   local _font_repository="https://github.com/ryanoasis/nerd-fonts"
-  local _font_repository_release="v3.1.1"
+  local _font_repository_release="v3.3.0"
   
   for font in "${_fonts_to_be_installed[@]}"; do
     local _font_path="$_font_home/$font"
@@ -36,12 +36,7 @@ run() {
 # curl -> unzip -> delete original
 function _fira_code() {
   font_family="FiraCode"
-  font_weights="Bold Medium Regular Light"
-  
-  
-  
-  
-  
+  font_weights="Bold Medium Regular Light"  
   
   if [ -d $font_home ]; then
     print_warning $1 "font directory for $font_family already exist."

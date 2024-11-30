@@ -29,7 +29,7 @@ _install_kubectl_ns_plugin() {
 
 _install_kubectl_neat_plugin() {
   local binary_path="/usr/local/bin/kubectl-neat"
-  local version="v2.0.3"
+  local version="v2.0.4"
   local url="https://github.com/itaysk/kubectl-neat/releases/download/$version/kubectl-neat_linux_amd64.tar.gz"
   
   if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi

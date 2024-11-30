@@ -9,6 +9,7 @@ run() {
   _install_gopass $1 $version
   _install_gopass_jsonapi $1 $version
 
+  mkdir -p "$dotfiles_directory/gopass"
   linker $1 "$dotfiles_directory/gopass/config" "$HOME/.config/gopass/config"
   gopass-jsonapi configure --browser firefox
 }
