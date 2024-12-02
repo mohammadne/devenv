@@ -25,7 +25,7 @@ cat gpg_key.backup | md5sum
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/mohammadne/devenv/main/scripts/clone.sh)"
 
 # 5. change to your devenv directory and initialize the dotfiles
-cd $HOME/Workspace/personal/devenv && ./scripts/install.sh git, ssh
+cd $HOME/Workspace/personal/devenv && ./scripts/install.sh git ssh
 # 6. add your public ssh credential to the Github
 
 # 7. clone credentials via gopass
