@@ -29,8 +29,7 @@ cd $HOME/Workspace/personal/devenv && ./scripts/install.sh git ssh
 # 6. add your public ssh credential to the Github
 
 # 7. clone credentials via gopass
-./scripts/install.sh security/gopass proxy/xray
-
+./scripts/install.sh security/gopass proxy/xray proxy/dnf
 # 8. setup foxyproxy in firefox
 
 # 9. install other tools and go ahead...
