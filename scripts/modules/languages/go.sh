@@ -5,6 +5,8 @@ info() {
 }
 
 run() {
+  sudo dnf install -qy gcc
+
   local go_root="/usr/local/go"
   
   _install_go $1 $go_root
@@ -13,6 +15,8 @@ run() {
 }
 
 _install_go() {
+  # we have to set http_proxy env before downloading the go binary
+
   local version="1.23.3"
   local url="https://go.dev/dl/go${version}.linux-amd64.tar.gz"
   
