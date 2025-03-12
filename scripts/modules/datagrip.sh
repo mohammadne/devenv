@@ -5,7 +5,10 @@ info() {
 }
 
 run() {
-  # https://download-cdn.jetbrains.com/datagrip/datagrip-2024.3.2.tar.gz
-
-  # ja-netlifier crack soft98
+  local applications_path="$HOME/Applications"
+  local version="2024.3.5"
+  local url="https://download-cdn.jetbrains.com/datagrip/datagrip-${version}.tar.gz"
+  
+  if ! result=$(download_file $1 $url); then echo "$result" && return 1; fi
+  sudo tar -C $applications_path -xzf $result && mv DataGrip-${version} DataGrip && rm -rf "$result"
 }
