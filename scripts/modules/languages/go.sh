@@ -17,7 +17,7 @@ run() {
 _install_go() {
   # we have to set http_proxy env before downloading the go binary
 
-  local version="1.23.3"
+  local version="1.24.1"
   local url="https://go.dev/dl/go${version}.linux-amd64.tar.gz"
   
   if check_versioned_binary $1 "$2/bin/go" $version "version"; then return; fi
@@ -42,10 +42,11 @@ _install_go_dependencies() {
   print_message $1 "install required go dependencies"
   $go_binary install golang.org/x/tools/gopls@latest # Language server from google
   $go_binary install github.com/cweill/gotests/gotests@v1.6.0 # Generate unit tests
-  $go_binary install github.com/fatih/gomodifytags@v1.16.0 # Modify tags on structs
-  $go_binary install github.com/josharian/impl@v1.1.0 # Stubs for interfaces
+  $go_binary install github.com/fatih/gomodifytags@v1.17.0 # Modify tags on structs
+  $go_binary install github.com/josharian/impl@v1.4.0 # Stubs for interfaces
+  $go_binary install github.com/haya14busa/goplay # The Go playground
   $go_binary install github.com/go-delve/delve/cmd/dlv@latest # Go debugger (Delve)
-  $go_binary install github.com/golangci/golangci-lint/cmd/golangci-lint@latest # Linter
+  $go_binary install honnef.co/go/tools/cmd/staticcheck@latest # Linter
   
   print_message $1 "install useful go dependencies"
   $go_binary install github.com/mikefarah/yq/v4@latest
