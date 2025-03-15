@@ -49,7 +49,7 @@ _install_go_dependencies() {
   $go_binary install honnef.co/go/tools/cmd/staticcheck@latest # Linter
   
   print_message $1 "install useful go dependencies"
-  $go_binary install github.com/mikefarah/yq/v4@latest
+  # $go_binary install github.com/mikefarah/yq/v4@latest
   # $go_binary install github.com/haya14busa/goplay/cmd/goplay@v1.0.0 # The Go playground
   # $go_binary install honnef.co/go/tools/cmd/staticcheck@latest
   # $go_binary install mvdan.cc/gofumpt
