@@ -17,7 +17,6 @@ run() {
   if ! result=$(download_file $1 $ja_netfilter_url); then echo "$result" && return 1; fi
   unzip -d $applications_path $result && rm -rf "$result"
 
-
 # TODO: add following into $applications_path/Datagrip/bin/datagrip64.vmoptions
 #   -javaagent:$applications_path/ja-netfilter/ja-netfilter.jar=jetbrains
 # --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED

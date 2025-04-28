@@ -17,7 +17,7 @@ run() {
 _install_go() {
   # we have to set http_proxy env before downloading the go binary
 
-  local version="1.24.1"
+  local version="1.24.2"
   local url="https://go.dev/dl/go${version}.linux-amd64.tar.gz"
   
   if check_versioned_binary $1 "$2/bin/go" $version "version"; then return; fi

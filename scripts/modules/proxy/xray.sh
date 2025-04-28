@@ -15,7 +15,7 @@ run() {
 
   # sudo systemctl enable podman-restart.service
 
-  # _pull_alpine $1 "$destination"
+  _pull_alpine $1 "$destination"
   
   export $(gopass show proxy/xray | sed 's/: /=/g')
 
@@ -24,8 +24,8 @@ run() {
 
   podman build -t "xray" "$destination" -f "$destination/Dockerfile"
 
-  podman run --restart=always -d --name "xray-notls" -p $notls_local_port:$notls_local_port "xray" ./xray run -c notls-config.json
-  podman run --restart=always -d --name "xray-reality" -p $reality_local_port:$reality_local_port "xray" ./xray run -c reality-config.json
+  podman run --restart=always -d --name "xray-notls" -p $notls_local_port:$notls_local_port -v "./notls.json:/usr/local/xray/config.json:z" "xray" run -c config.json
+  podman run --restart=always -d --name "xray-reality" -p $reality_local_port:$reality_local_port -v "./reality.json:/usr/local/xray/config.json:z" "xray" run -c config.json
 }
 
 _pull_alpine() {
