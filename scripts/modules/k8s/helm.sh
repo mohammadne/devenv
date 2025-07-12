@@ -14,6 +14,6 @@ run() {
   sudo tar -C $(dirname $binary_path) -xzf $result --strip-components=1 "linux-amd64/helm" && rm -rf "$result"
   
   # install required helm plugins
-  $binary_path plugin install https://github.com/databus23/helm-diff --version v3.9.5
-  $binary_path plugin install https://github.com/jkroepke/helm-secrets --version v4.6.0
+  $binary_path plugin install https://github.com/databus23/helm-diff --version v3.12.3
+  $binary_path plugin install https://github.com/jkroepke/helm-secrets --version v4.6.5
 }
