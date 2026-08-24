@@ -5,7 +5,7 @@ info() {
 }
 
 run() {
-  sudo dnf install -qy vim
+  # brew install -qy vim
   
   linker $1 "$dotfiles_directory/vim/vimrc" "$HOME/.vimrc"
   

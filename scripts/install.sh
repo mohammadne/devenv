@@ -14,7 +14,7 @@ source_values "$scripts_directory/values.env"
 trap "echo see you in a better tomorrow [you signal $program execuation]; exit" INT
 
 # ensure we are using Fedora distribution
-ensure_fedora $program
+# ensure_fedora $program
 
 function _usage() {
   echo ""

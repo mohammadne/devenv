@@ -19,3 +19,6 @@ run() {
   #     fi
   #   done
 }
+
+
+# ipykernel
